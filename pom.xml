@@ -9,6 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>mehmetari</groupId>
+
 	<artifactId>codeprogram</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>codeprogram</name>
@@ -45,6 +46,15 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.0-M4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
