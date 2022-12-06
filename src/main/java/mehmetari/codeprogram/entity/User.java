@@ -1,5 +1,6 @@
 package mehmetari.codeprogram.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -19,9 +20,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Email
+    @JsonProperty("E-Mail")
     private String email;
 
     @Size(min = 2, message = "İki karakterden fazla girilmelidir.")
+    @JsonProperty("Sifre")
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY)

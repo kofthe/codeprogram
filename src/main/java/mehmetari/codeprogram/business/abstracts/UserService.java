@@ -1,12 +1,16 @@
 package mehmetari.codeprogram.business.abstracts;
 
+import mehmetari.codeprogram.business.request.user.CreateUserRequest;
+import mehmetari.codeprogram.business.response.GetUserResponse;
 import mehmetari.codeprogram.entity.User;
 
 public interface UserService {
 
-    User add(User user);
+    CreateUserRequest add(CreateUserRequest createUserRequest);
 
-    void deleteById(int id);
+    GetUserResponse findById(int id);
+
+    void deleteById(int id) throws Exception;
 
 
 

@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private MessageSource messageSource;
 
-    @PostMapping("/add")
+    @PostMapping(path = "/add", params = "version1")
     public User add(User user) {
         return userService.add(user);
     }
