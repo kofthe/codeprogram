@@ -2,10 +2,10 @@ package mehmetari.codeprogram.business.concretes;
 
 import mehmetari.codeprogram.business.abstracts.UserService;
 import mehmetari.codeprogram.business.request.user.CreateUserRequest;
-import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
+
 import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.business.response.GetUserResponse;
-import mehmetari.codeprogram.entity.Question;
+
 import mehmetari.codeprogram.entity.User;
 import mehmetari.codeprogram.repository.QuestionRepository;
 import mehmetari.codeprogram.repository.UserRepository;
@@ -52,13 +52,11 @@ public class UserManager implements UserService {
 
     @Override
     public List<GetAllUsersResponse> getAll() {
-        List<Question> question = questionRepository.findAll();
         List<User> userList = userRepository.findAll();
         List<GetAllUsersResponse> getAllUsersResponses = new ArrayList<>();
         for (User user : userList) {
             GetAllUsersResponse getAllUsersResponse = new GetAllUsersResponse();
             getAllUsersResponse.setEmail(user.getEmail());
-            getAllUsersResponse.setQuestionList(question);
 
         }
         return getAllUsersResponses;

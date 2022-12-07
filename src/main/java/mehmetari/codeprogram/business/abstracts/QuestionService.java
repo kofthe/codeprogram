@@ -15,5 +15,5 @@ public interface QuestionService {
 
     Question addQuestion(CreateQuestionRequest createQuestionRequest);
 
-
+    void deleteQuestion(int id);
 }

@@ -50,10 +50,25 @@ public class QuestionManager implements QuestionService {
         return questionRepository.save(question);
     }
 
+    @Override
+    public void deleteQuestion(int id) {
+        isIdExist(id);
+        questionRepository.deleteById(id);
+    }
+
     public User getUser(int id){
         return userRepository.findById(id).get();
     }
 
 
+    public boolean isIdExist(int id) {
+        List<User> userlist = userRepository.findAll();
+        for (User user : userlist){
+            if (user.getId() == id) return true;
+
+        }
+        return false;
+
+    }
 
 }
