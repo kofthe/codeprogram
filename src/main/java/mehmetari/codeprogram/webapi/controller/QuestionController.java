@@ -1,15 +1,13 @@
 package mehmetari.codeprogram.webapi.controller;
 
 import mehmetari.codeprogram.business.abstracts.QuestionService;
+import mehmetari.codeprogram.business.request.question.CreateQuestionRequest;
 import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
 import mehmetari.codeprogram.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +27,8 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.getAll(), HttpStatus.OK);
     }
 
+    @PostMapping("/addquestion")
+    public Question addQuestion(@RequestBody CreateQuestionRequest createQuestionRequest){
+        return questionService.addQuestion(createQuestionRequest);
+    }
 }

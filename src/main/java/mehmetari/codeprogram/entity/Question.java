@@ -18,7 +18,7 @@ public class Question {
     private String description;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;
 

@@ -1,6 +1,8 @@
 package mehmetari.codeprogram.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -15,19 +17,20 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","questionList"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Email
-    @JsonProperty("E-Mail")
+    @JsonProperty("email")
     private String email;
 
     @Size(min = 2, message = "İki karakterden fazla girilmelidir.")
-    @JsonProperty("Sifre")
+    @JsonProperty("password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private List<Question> questionList;
 
 }

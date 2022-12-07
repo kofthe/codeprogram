@@ -1,6 +1,7 @@
 package mehmetari.codeprogram.business.concretes;
 
 import mehmetari.codeprogram.business.abstracts.QuestionService;
+import mehmetari.codeprogram.business.request.question.CreateQuestionRequest;
 import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
 import mehmetari.codeprogram.entity.Question;
 import mehmetari.codeprogram.entity.User;
@@ -17,6 +18,7 @@ import java.util.List;
 public class QuestionManager implements QuestionService {
     @Autowired
     QuestionRepository questionRepository;
+    @Autowired
     UserRepository userRepository;
 
     @Override
@@ -36,6 +38,16 @@ public class QuestionManager implements QuestionService {
         }
 
         return getAllQuestionsResponse;
+    }
+
+    @Override
+    public Question addQuestion(CreateQuestionRequest createQuestionRequest) {
+        Question question = new Question();
+        User user = userRepository.getReferenceById(createQuestionRequest.getUserId());
+        question.setTitle(createQuestionRequest.getTitle());
+        question.setDescription(createQuestionRequest.getDescription());
+        question.setUser(user);
+        return questionRepository.save(question);
     }
 
     public User getUser(int id){

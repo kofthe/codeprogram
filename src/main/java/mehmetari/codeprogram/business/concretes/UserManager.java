@@ -2,13 +2,16 @@ package mehmetari.codeprogram.business.concretes;
 
 import mehmetari.codeprogram.business.abstracts.UserService;
 import mehmetari.codeprogram.business.request.user.CreateUserRequest;
+import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
+import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.business.response.GetUserResponse;
 import mehmetari.codeprogram.entity.User;
 import mehmetari.codeprogram.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserManager implements UserService {
@@ -16,12 +19,13 @@ public class UserManager implements UserService {
     UserRepository userRepository;
 
     @Override
-    public CreateUserRequest add(CreateUserRequest createUserRequest) {
+    public User add(CreateUserRequest createUserRequest) {
         User user = new User();
+
         user.setEmail(createUserRequest.getEmail());
         user.setPassword(createUserRequest.getPassword());
-        this.userRepository.save(user);
-        return createUserRequest;
+
+        return this.userRepository.save(user);
     }
 
     @Override
@@ -39,6 +43,16 @@ public class UserManager implements UserService {
             }
             userRepository.deleteById(id);
 
+    }
+
+    @Override
+    public List<GetAllQuestionsResponse> getAll() {
+        List<User> userList = userRepository.findAll();
+        List<GetAllUsersResponse> getAllUsersResponses = new ArrayList<>();
+        for (User user : userList) {
+            GetAllUsersResponse getAllUsersResponse = new GetAllUsersResponse();
+            getAllUsersResponse.setEmail(user.getEmail());
+        }
     }
 
     public boolean isIdExists(int id){
