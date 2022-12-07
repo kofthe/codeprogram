@@ -10,4 +10,6 @@ public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
     void findByUserAndTitle(User user, String title);
 
+    void findByUser(User user);
+
 }

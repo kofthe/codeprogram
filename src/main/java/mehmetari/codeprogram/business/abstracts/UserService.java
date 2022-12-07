@@ -2,6 +2,7 @@ package mehmetari.codeprogram.business.abstracts;
 
 import mehmetari.codeprogram.business.request.user.CreateUserRequest;
 import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
+import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.business.response.GetUserResponse;
 import mehmetari.codeprogram.entity.User;
 
@@ -15,6 +16,6 @@ public interface UserService {
 
     void deleteById(int id) throws Exception;
 
-    List<GetAllQuestionsResponse> getAll();
+    List<GetAllUsersResponse> getAll();
 
 }

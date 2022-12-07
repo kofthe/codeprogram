@@ -5,7 +5,9 @@ import mehmetari.codeprogram.business.request.user.CreateUserRequest;
 import mehmetari.codeprogram.business.response.GetAllQuestionsResponse;
 import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.business.response.GetUserResponse;
+import mehmetari.codeprogram.entity.Question;
 import mehmetari.codeprogram.entity.User;
+import mehmetari.codeprogram.repository.QuestionRepository;
 import mehmetari.codeprogram.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import java.util.List;
 public class UserManager implements UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    QuestionRepository questionRepository;
 
     @Override
     public User add(CreateUserRequest createUserRequest) {
@@ -46,13 +51,17 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public List<GetAllQuestionsResponse> getAll() {
+    public List<GetAllUsersResponse> getAll() {
+        List<Question> question = questionRepository.findAll();
         List<User> userList = userRepository.findAll();
         List<GetAllUsersResponse> getAllUsersResponses = new ArrayList<>();
         for (User user : userList) {
             GetAllUsersResponse getAllUsersResponse = new GetAllUsersResponse();
             getAllUsersResponse.setEmail(user.getEmail());
+            getAllUsersResponse.setQuestionList(question);
+
         }
+        return getAllUsersResponses;
     }
 
     public boolean isIdExists(int id){
