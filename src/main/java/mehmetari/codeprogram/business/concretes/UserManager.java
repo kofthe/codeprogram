@@ -3,6 +3,7 @@ package mehmetari.codeprogram.business.concretes;
 import mehmetari.codeprogram.business.abstracts.UserService;
 import mehmetari.codeprogram.business.request.user.CreateUserRequest;
 
+import mehmetari.codeprogram.business.request.user.UpdateUserRequest;
 import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.business.response.GetUserResponse;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserManager implements UserService {
@@ -60,6 +62,19 @@ public class UserManager implements UserService {
 
         }
         return getAllUsersResponses;
+    }
+
+    @Override
+    public User update(UpdateUserRequest updateUserRequest, int id) {
+        isIdExists(id);
+        User user2 = userRepository.findById(id).get();
+
+            User user1 = new User();
+            user1.setEmail(updateUserRequest.getEmail());
+            user1.setPassword(updateUserRequest.getPassword());
+            userRepository.save(user1);
+
+    return user2;
     }
 
     public boolean isIdExists(int id){

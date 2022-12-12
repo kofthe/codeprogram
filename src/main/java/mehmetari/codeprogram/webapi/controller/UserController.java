@@ -2,6 +2,7 @@ package mehmetari.codeprogram.webapi.controller;
 
 import mehmetari.codeprogram.business.abstracts.UserService;
 import mehmetari.codeprogram.business.request.user.CreateUserRequest;
+import mehmetari.codeprogram.business.request.user.UpdateUserRequest;
 import mehmetari.codeprogram.business.response.GetAllUsersResponse;
 import mehmetari.codeprogram.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
@@ -38,5 +40,15 @@ public class UserController {
     public ResponseEntity<List<GetAllUsersResponse>> getAll(){
         return  new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<User> update(@RequestBody UpdateUserRequest updateUserRequest,@PathVariable int id){
+        User user = userService.update(updateUserRequest, id);
+       if (Objects.nonNull(updateUserRequest)) {
+           return new ResponseEntity<>(user, HttpStatus.OK);
+       }
+       return ResponseEntity.noContent().build();
+    }
+
 
 }
